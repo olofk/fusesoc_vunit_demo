@@ -1,0 +1,21 @@
+CAPI=1
+[main]
+description = AXI Stream example packet generator
+depend = libstorage-1.0 libaxis-1.0 osvvm-2015.06
+
+[fileset src_files]
+files = 
+ axis_packet_generator.vhd
+file_type = vhdlSource-2008
+logical_name = axis_packet_generator
+usage = sim synth
+
+[fileset tb_files]
+files = 
+ tb_axis_packet_generator.vhd
+file_type = vhdlSource-2008
+logical_name=axis_packet_generator
+usage = sim
+
+[simulator]
+toplevel = axis_packet_generator.tb_axis_packet_generator
