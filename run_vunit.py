@@ -19,14 +19,16 @@ from collections import OrderedDict
 import os.path
 from fusesoc.config import Config
 from fusesoc.coremanager import CoreManager, DependencyError
-from vunit import VUnit
+from vunit import VUnitCLI, VUnit
+
+cli = VUnitCLI()
+cli.parser.add_argument('--core', nargs=1, required=True, help='Top-level FuseSoC core')
+args = cli.parse_args()
 
 # Create VUnit instance by parsing command line arguments
-vu = VUnit.from_argv()
+vu = VUnit.from_args(args=args)
 
-#Hack 1. Use the last part of the vunit output path to select which core to
-#use as top-level core for FuseSoC
-top_core = os.path.basename(vu._output_path)
+top_core = args.core[0]
 
 #Create singleton instances for core manager and configuration handler
 #Configuration manager is not needed in this example
